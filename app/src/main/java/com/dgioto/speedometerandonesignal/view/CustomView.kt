@@ -6,16 +6,24 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import kotlin.math.atan2
 
 class CustomView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
     private val paint = Paint()
     private val paintC = Paint()
     // Угол начала рисования секторов (в градусах)
-    private val startAngle = -180f
-    private val colors = listOf(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW)
+    private val startAngle = 0f
+    private val colors = listOf(
+        Color.RED,
+        Color.BLUE,
+        Color.GREEN,
+        Color.CYAN,
+        Color.BLACK,
+        Color.YELLOW)
     // Угол, на который делится круг для каждого цвета
     private val sweepAngle = 360f / colors.size
     private var buttonClicked = -1
@@ -64,14 +72,15 @@ class CustomView(context: Context, attributeSet: AttributeSet) : View(context, a
 
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                //click on RED
-                if (x < centerX && y < centerY) buttonClicked = 0
-                //click on BLUE
-                if (x > centerX && y < centerY) buttonClicked = 1
-                //click on GREEN
-                if (x > centerX && y > centerY) buttonClicked = 2
-                //click on YELLOW
-                if (x < centerX && y > centerY) buttonClicked = 3
+                val angle = (Math.toDegrees(
+                    atan2(
+                        y - centerY,
+                        x - centerX
+                    ).toDouble()
+                ) + 360) % 360
+                buttonClicked = (angle / ( 360 / colors.size)).toInt()
+                Log.d("MyLog", "Angle: $angle")
+
                 // Перерисовка вида
                 invalidate()
             }
