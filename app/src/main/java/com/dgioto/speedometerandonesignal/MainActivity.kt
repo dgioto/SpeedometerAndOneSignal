@@ -2,6 +2,8 @@ package com.dgioto.speedometerandonesignal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dgioto.speedometerandonesignal.databinding.ActivityMainBinding
+import com.dgioto.speedometerandonesignal.view.CustomView
 import com.onesignal.OneSignal
 import com.onesignal.debug.LogLevel
 import kotlinx.coroutines.CoroutineScope
@@ -11,12 +13,24 @@ import kotlinx.coroutines.launch
 // NOTE: Replace the below with your own ONESIGNAL_APP_ID
 const val ONESIGNAL_APP_ID = "8e4b6695-3a3a-4e08-8e19-268535b6b257"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CustomView.Listener {
+
+    private lateinit var binding: ActivityMainBinding
+    private val menuList = listOf(
+        "Add", "Edit", "Paint", "Clear", "Delete", "Exit", "Hello", "Draw"
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.customView.listener = this
 
         setOneSignal()
+    }
+
+    override fun onClick(index: Int) {
+        binding.tvSelection.text = menuList[index]
     }
 
     private fun setOneSignal() {

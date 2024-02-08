@@ -13,6 +13,8 @@ import kotlin.math.atan2
 
 class CustomView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
+    var  listener: Listener? = null
+
     private val paint = Paint()
     private val paintC = Paint()
     // Угол начала рисования секторов (в градусах)
@@ -61,6 +63,14 @@ class CustomView(context: Context, attributeSet: AttributeSet) : View(context, a
                 paintC
             )
         }
+
+        paintC.color = Color.WHITE
+        canvas.drawCircle(
+            centerX ,
+            centerY ,
+            radius / 1.7f,
+            paintC
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -79,18 +89,20 @@ class CustomView(context: Context, attributeSet: AttributeSet) : View(context, a
                     ).toDouble()
                 ) + 360) % 360
                 buttonClicked = (angle / ( 360 / colors.size)).toInt()
+
+                listener?.onClick(buttonClicked)
+
                 Log.d("MyLog", "Angle: $angle")
 
                 // Перерисовка вида
                 invalidate()
             }
-            // Сброс выбранной кнопки при отпускании экрана
-            MotionEvent.ACTION_UP -> {
-                buttonClicked = -1
-                invalidate()
-            }
         }
         // Возвращение true, чтобы показать, что событие обработано
         return true
+    }
+
+    interface Listener{
+        fun onClick(index: Int)
     }
 }

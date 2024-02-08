@@ -6,12 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.dgioto.speedometerandonesignal.view.CustomView
+    <TextView
+        android:id="@+id/tvSelection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="50dp"
+        android:textColor="#000000"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.dgioto.speedometerandonesignal.view.CustomView
+        android:id="@+id/custom_view"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="32dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSelection" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
