@@ -16,9 +16,6 @@ const val ONESIGNAL_APP_ID = "8e4b6695-3a3a-4e08-8e19-268535b6b257"
 class MainActivity : AppCompatActivity(), CustomView.Listener {
 
     private lateinit var binding: ActivityMainBinding
-    private val menuList = listOf(
-        "Add", "Edit", "Paint", "Clear", "Delete", "Exit", "Hello", "Draw"
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,14 +23,14 @@ class MainActivity : AppCompatActivity(), CustomView.Listener {
         setContentView(binding.root)
         binding.customView.listener = this
 
-        setOneSignal()
+        setOneSignalTest()
     }
 
     override fun onClick(index: Int) {
-        binding.tvSelection.text = menuList[index]
+        binding.tvSelection.text = TextUtils.menuList[index]
     }
 
-    private fun setOneSignal() {
+    private fun setOneSignalTest() {
         // Verbose Logging set to help debug issues, remove before releasing your app.
         OneSignal.Debug.logLevel = LogLevel.VERBOSE
 
