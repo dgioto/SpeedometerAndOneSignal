@@ -3,7 +3,6 @@ package com.dgioto.speedometerandonesignal
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dgioto.speedometerandonesignal.databinding.ActivityMainBinding
-import com.dgioto.speedometerandonesignal.view.CustomView
 import com.onesignal.OneSignal
 import com.onesignal.debug.LogLevel
 import kotlinx.coroutines.CoroutineScope

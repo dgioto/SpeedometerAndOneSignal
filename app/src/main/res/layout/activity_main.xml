@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.dgioto.speedometerandonesignal.view.CustomView
+    <com.dgioto.speedometerandonesignal.CustomView
         android:id="@+id/custom_view"
         android:layout_width="300dp"
         android:layout_height="300dp"
